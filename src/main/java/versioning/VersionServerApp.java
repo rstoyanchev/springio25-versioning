@@ -24,14 +24,14 @@ public class VersionServerApp {
 
 	@Bean
 	AccountRepository accountRepository() {
-		return new AccountRepository(Map.of("1", new Account("1", "Checking")));
+		return new AccountRepository(Map.of("99", new Account("99", "Checking")));
 	}
 
 	@Bean
 	StatementRepository statementRepository() {
 		MultiValueMap<String, Statement> statements = new LinkedMultiValueMap<>();
-		statements.add("1", new Statement(new BigDecimal(250), Type.CREDIT));
-		statements.add("1", new Statement(new BigDecimal(110), Type.DEBIT));
+		statements.add("99", new Statement(new BigDecimal(250), Type.CREDIT));
+		statements.add("99", new Statement(new BigDecimal(110), Type.DEBIT));
 		return new StatementRepository(statements);
 	}
 }
