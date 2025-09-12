@@ -18,11 +18,11 @@ class ContextTests {
 
 	@Test
 	void getAccount(@Autowired MockMvcTester tester) {
-		tester.get().uri("/accounts/1")
+		tester.get().uri("/accounts/99")
 				.apiVersion(1.1)
 				.assertThat()
 				.hasStatusOk()
-				.bodyJson().isEqualTo("{\"id\":\"1\",\"name\":\"Checking\"}");
+				.bodyJson().isEqualTo("{\"id\":\"99\",\"name\":\"Checking\"}");
 	}
 
 	@TestConfiguration

@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.web.reactive.server.WebTestClientBuilderCustomizer;
+import org.springframework.boot.web.server.test.client.reactive.WebTestClientBuilderCustomizer;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.client.ApiVersionInserter;
 
@@ -33,11 +33,11 @@ public class ClientTests {
 
 	@Test
 	void getAccount(@Autowired WebTestClient webTestClient) {
-		webTestClient.get().uri("/accounts/1")
+		webTestClient.get().uri("/accounts/99")
 				.apiVersion(1.1)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(Account.class).isEqualTo(new Account("1", "Checking"));
+				.expectBody(Account.class).isEqualTo(new Account("99", "Checking"));
 	}
 
 	@TestConfiguration
