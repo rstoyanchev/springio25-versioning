@@ -20,20 +20,22 @@ import org.junit.jupiter.api.Test;
 import versioning.repository.Account;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+import org.springframework.boot.resttestclient.autoconfigure.RestTestClientBuilderCustomizer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.web.server.test.client.reactive.WebTestClientBuilderCustomizer;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.web.client.ApiVersionInserter;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestTestClient
 public class ClientTests {
 
 	@Test
-	void getAccount(@Autowired WebTestClient webTestClient) {
-		webTestClient.get().uri("/accounts/99")
+	void getAccount(@Autowired RestTestClient restTestClient) {
+		restTestClient.get().uri("/accounts/99")
 				.apiVersion(1.1)
 				.exchange()
 				.expectStatus().isOk()
@@ -41,10 +43,10 @@ public class ClientTests {
 	}
 
 	@TestConfiguration
-	static class TestConfig implements WebTestClientBuilderCustomizer {
+	static class TestConfig implements RestTestClientBuilderCustomizer {
 
 		@Override
-		public void customize(WebTestClient.Builder builder) {
+		public void customize(RestTestClient.Builder builder) {
 			builder.apiVersionInserter(ApiVersionInserter.useHeader("X-API-Version"));
 		}
 	}
