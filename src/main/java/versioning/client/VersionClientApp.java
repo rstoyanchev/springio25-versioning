@@ -35,7 +35,7 @@ public class VersionClientApp {
 				.requestInterceptor(new LoggingInterceptor())
 				.build();
 
-		Account account = client.get().uri("/accounts/1")
+		Account account = client.get().uri("/accounts/99")
 				.apiVersion(1.1)
 				.retrieve()
 				.body(Account.class);

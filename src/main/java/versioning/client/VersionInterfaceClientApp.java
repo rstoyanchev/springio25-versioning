@@ -42,7 +42,7 @@ public class VersionInterfaceClientApp {
 
 		AccountService accountService = proxyFactory.createClient(AccountService.class);
 
-		Account account = accountService.getAccount(1);
+		Account account = accountService.getAccount(99);
 		logger.info(account);
 	}
 
